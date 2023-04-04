@@ -1,0 +1,15 @@
+module mux_21(I,sel,out);
+input [1:0]I;
+input sel;
+output out;
+wire sel_n;
+wire [1:0]o;
+
+not(sel_n,sel);
+and(o[0],I[0],sel_n);
+and(o[1],I[1],sel);
+or(out,o[0],o[1]);
+
+endmodule
+
+

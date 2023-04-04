@@ -1,0 +1,36 @@
+
+module mux_21_tb;
+
+	// Inputs
+	reg [1:0] I;
+	reg sel;
+	integer i;
+
+	// Outputs
+	wire out;
+
+	// Instantiate the Unit Under Test (UUT)
+	mux_21 uut (
+		.I(I), 
+		.sel(sel), 
+		.out(out)
+	);
+
+	initial
+begin
+//test bench with non-blocking assignments
+{I,sel}<=0;
+$monitor("time: T=%t,Inputs:I[0]=%b,I[1]=%b,sel=%b,Outputs:out=%b",$time,I[0],I[1],sel,out);
+for(i=0;i<8;i=i+1)
+begin
+#5;
+I<={$random}%4;
+sel<={$random};
+end
+end
+
+//using system task to finish the simulation at a time step
+initial 
+
+#100 $finish();
+endmodule

@@ -1,0 +1,18 @@
+// gate-level modelling of 4X1 Demux
+module gate_demux_14(I,sel,out);
+input I;
+input [1:0]sel;
+output [3:0]out;
+wire [1:0]sel_n;
+
+not(sel_n[0],sel[0]);
+not(sel_n[1],sel[1]);
+
+and (out[0],sel_n[1],sel_n[0],I);
+and (out[1],sel_n[1],sel[0],I);
+and (out[2],sel[1],sel_n[0],I);
+and (out[3],sel[1],sel[0],I);
+
+endmodule
+
+

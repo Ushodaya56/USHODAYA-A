@@ -1,0 +1,17 @@
+//gate_level modelling of full_adder
+module gate_full_adder(A,B,Cin,Sum,Carry);
+input A,B,Cin;
+output Sum,Carry;
+wire o1;
+wire [0:3]c;
+xor(o1,A,B);
+xor(Sum,o1,Cin);
+
+and(c[0],A,B);
+and(c[1],B,Cin);
+and(c[2],A,Cin);
+
+or(c[3],c[0],c[1]);
+or(Carry,c[3],c[2]);
+
+endmodule

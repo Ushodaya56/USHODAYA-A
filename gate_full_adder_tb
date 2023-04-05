@@ -1,0 +1,38 @@
+//non-blocking and randomized tes bench of full adder
+module gate_full_adder_tb;
+
+	// Inputs
+	reg A;
+	reg B;
+	reg Cin;
+	integer i;
+
+	// Outputs
+	wire Sum;
+	wire Carry;
+
+	// Instantiate the Unit Under Test (UUT)
+	gate_full_adder uut (.A(A),.B(B),.Cin(Cin),.Sum(Sum),.Carry(Carry));
+
+	initial 
+	   begin
+		// Initialize Inputs
+		 {A,B,Cin}<=0;
+		 $monitor("T=%t,Inputs:A=%b,B=%b,Cin=%b,Output: Sum=%b,Carry=%b",$time,A,B,Cin,Sum,Carry);
+		// Wait 100 ns for global reset to finish
+		  for(i=0;i<10;i=i+1)
+		     begin
+			    #5;
+			    {A,B,Cin}<={$random};
+				end
+		  end
+			initial
+				#200 $finish();
+				 
+        
+		// Add stimulus here
+
+
+      
+endmodule
+

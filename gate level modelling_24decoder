@@ -1,0 +1,15 @@
+// gate level modelling of 24 decoder
+module decoder_24(I,en,out);
+input [1:0]I;
+input en;
+wire in_1,in_0;
+output [3:0]out;
+
+not(in_1,I[1]);
+not(in_0,I[0]);
+and (out[0],in_1,in_0,en);
+and (out[1],in_1,I[0],en);
+and (out[2],I[1],in_0,en);
+and (out[3],I[1],I[0],en);
+
+endmodule

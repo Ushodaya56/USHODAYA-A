@@ -1,0 +1,32 @@
+//randomized and non-blocking test bench
+module half_subtractor_tb;
+
+	// Outputs
+	reg A,B,Cin;
+	wire Diff,Borr;
+	integer i;
+	
+
+	// Instantiate the Unit Under Test (UUT)
+	full_subtractor uut (.A(A),.B(B),.Cin(Cin),.Diff(Diff),.Borr(Borr));
+	
+
+	initial 
+	  begin
+		 {A,B,Cin}<=0;
+		 $monitor("T=%t,Inputs:A=%b,B=%b,Cin=%b,Output: Diff=%b,Borr=%b",$time,A,B,Cin,Diff,Borr);
+		 for(i=0;i<10;i=i+1)
+		 begin
+		 #5;
+		 {A,B,Cin}<={$random};
+		 end
+		 
+		end
+	
+	initial
+	#100 $finish();
+        
+
+      
+endmodule
+

@@ -1,0 +1,34 @@
+//usage of non-blocking test bench and random values as input for 4:2 encoder, as when multiple inputs are 1 then, also as the logic is of a encoder 4:2 the output is always choosen as per the logic defined
+// that is for any random value the output is always 00
+module encoder_42_tb;
+
+	// Inputs
+	reg [3:0] I;
+	reg en;
+   integer i;
+	// Outputs
+	wire [1:0] out;
+
+	// Instantiate the Unit Under Test (UUT)
+	encoder_42 uut (.I(I),.en(en),.out(out));
+
+	initial 
+	  begin
+		// Initialize Inputs
+       
+      {I,en}<=0;
+		// Wait 100 ns for global reset to finish
+      $monitor("T=%t,Inputs: I=%b,en=%b, Output: out=%b",$time,I,en,out);
+		
+		en<=1'b1;
+		for(i=0;i<10;i=i+1)
+		 begin
+		   #5;
+			I={$random};
+		 end
+		end
+   initial
+	  #100 $finish();
+      
+endmodule
+

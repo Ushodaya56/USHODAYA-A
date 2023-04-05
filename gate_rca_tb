@@ -1,0 +1,40 @@
+// test bench of ripple carry adder
+module rca_tb;
+
+	// Inputs
+	reg [3:0] A;
+	reg [3:0] B;
+	reg Cin;
+	integer i;
+
+	// Outputs
+	wire [3:0] Sum;
+	wire [3:0] Cout;
+
+	// Instantiate the Unit Under Test (UUT)
+	rca uut (
+		.A(A), 
+		.B(B), 
+		.Cin(Cin), 
+		.Sum(Sum), 
+		.Cout(Cout)
+	);
+
+	initial
+    	begin
+		// Initialize Inputs
+	      {A,B,Cin}<=0;
+			$monitor("T=%t,Input: A=%b,B=%b,Cin=%b,Output: Sum=%b,Cout[3]=%b",$time,A,B,Cin,Sum,Cout[3]);
+			for(i=0;i<10;i=i+1)
+			 begin
+			   #5;
+			   {A,B,Cin}<={$random};
+			 end
+			 
+		end
+		
+		initial
+		
+		#200 $finish();
+endmodule
+

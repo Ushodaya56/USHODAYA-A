@@ -1,0 +1,33 @@
+// testbench of decoder 24
+module decoder_24_tb;
+
+	// Outputs
+	reg [1:0]I;
+	reg en;
+	wire [3:0]out;
+	integer i;
+	
+
+	// Instantiate the Unit Under Test (UUT)
+	decoder_24 uut (.I(I),.en(en),.out(out));
+
+	initial 
+	   begin
+		// Initialize Inputs
+        {I,en}<=0;
+		// Wait 100 ns for global reset to finish
+		  $monitor("T=%t ,Inputs: I=%b, en=%b, output: out=%b",$time,I,en,out);
+		  en<=1'b1;
+		  for(i=0;i<10;i=i+1)
+		    begin
+			   #5;
+			   I<={$random};
+			 end
+		 end
+		 
+     initial
+	    
+		#100 $finish();
+     
+endmodule
+

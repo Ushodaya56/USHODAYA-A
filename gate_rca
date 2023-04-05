@@ -1,0 +1,15 @@
+//gate level modelling full_adder is used in top module of ripple carry adder
+//the dealay in ripple carry adder is more because the output carry of first full adder is fed as input to the other full_adder. So, the delay of gates is propogated 
+//Formulae: tpd of rca= (n-1)carry delay+ sum delay
+module rca(A,B,Cin,Sum,Cout);
+input [3:0]A,B;
+input Cin;
+output [3:0]Sum,Cout;
+
+full_adder f1(.A(A[0]),.B(B[0]),.Cin(Cin),.Sum(Sum[0]),.Carry(Cout[0]));
+full_adder f2(.A(A[1]),.B(B[1]),.Cin(Cout[0]),.Sum(Sum[1]),.Carry(Cout[1]));
+full_adder f3(.A(A[2]),.B(B[2]),.Cin(Cout[1]),.Sum(Sum[2]),.Carry(Cout[2]));
+full_adder f4(.A(A[3]),.B(B[3]),.Cin(Cout[2]),.Sum(Sum[3]),.Carry(Cout[3]));
+
+
+endmodule

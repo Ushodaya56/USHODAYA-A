@@ -1,0 +1,17 @@
+//gate-level modelling of full subtractor
+module full_subtractor(A,B,Cin,Diff,Borr);
+input A,B,Cin;
+output Diff, Borr;
+wire [0:3]b;
+wire a1;
+
+xor(o1,A,B);
+xor(Diff,o1,Cin);
+
+not(a1,A);
+and(b[0],a1,B);
+and(b[1],a1,Cin);
+and(b[2],B,Cin);
+or(b[3],b[1],b[0]);
+or(Borr,b[3],b[2]);
+endmodule

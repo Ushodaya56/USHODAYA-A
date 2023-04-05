@@ -1,0 +1,25 @@
+// gate level modelling of 4:2 encoder
+module encoder_42(I,en,out);
+input [3:0]I;
+input en;
+output [1:0]out;
+
+wire[3:0]in;
+
+wire [3:0]o;
+
+not(in[0],I[0]);
+not(in[1],I[1]);
+not(in[2],I[2]);
+not(in[3],I[3]);
+
+and(o[0],in[3],in[2],I[1],in[0],en);
+and(o[1],I[3],in[2],in[1],in[0],en);
+and(o[2],in[3],I[2],in[1],in[0],en);
+and(o[3],I[3],in[2],in[1],in[0],en);
+
+or(out[0],o[0],o[1]);
+or(out[1],o[2],o[3]);
+
+
+endmodule

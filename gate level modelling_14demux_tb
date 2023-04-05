@@ -1,0 +1,38 @@
+//random input values are generated and test bench is of non-blocking type
+
+module gate_demux_14_tb;
+
+	// Inputs
+	reg I;
+	reg [1:0] sel;
+	integer i;
+
+	// Outputs
+	wire [3:0] out;
+
+	// Instantiate the Unit Under Test (UUT)
+	gate_demux_14 uut (.I(I),.sel(sel),.out(out));
+
+	initial 
+	   begin
+		// Initialize Inputs
+		  {sel,I}<=0;
+		  $monitor("T=%t,Inputs: sel=%b, I=%b, Output: out=%b",$time,sel,I,out);
+        for(i=0;i<15;i=i+1)
+		    begin
+			 #5;
+			 sel<={$random};
+			 I<={$random};
+			 end
+			 
+			end
+			initial
+			  #100 $finish();
+			  
+		// Wait 100 ns for global reset to finish
+	
+		// Add stimulus here
+
+
+      
+endmodule

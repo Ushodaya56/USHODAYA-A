@@ -1,0 +1,32 @@
+// gate-level design of cla , whic is showing sa,e delay as in acse of rca.
+// This shows taht the differentiation in the design cannot be oroperly implmented through gate-level abstraction, it is possible only through data-flow abstraction, then by behavioral modelling
+module cla(A,B,Cin,Sum,Cout);
+input [3:0]A,B;
+input Cin;
+
+output [3:0]Sum, Cout;
+
+modified_full_adder f1(.A(A[0]),.B(B[0]),.Cin(Cin),.Sum(Sum[0]),.Cout(Cout[0]));
+modified_full_adder f2(.A(A[1]),.B(B[1]),.Cin(Cout[0]),.Sum(Sum[1]),.Cout(Cout[1]));
+modified_full_adder f3(.A(A[2]),.B(B[2]),.Cin(Cout[1]),.Sum(Sum[2]),.Cout(Cout[2]));
+modified_full_adder f4(.A(A[3]),.B(B[3]),.Cin(Cout[2]),.Sum(Sum[3]),.Cout(Cout[3]));
+
+endmodule
+module modified_full_adder(A,B,Cin,Sum,Cout);
+input A,B,Cin;
+output Sum,Cout;
+wire Cg,Cp;
+
+xor(Cg,A,B);
+xor(Sum,Cg,Cin);
+
+and(Cp,A,B);
+and(x,Cg,Cin);
+or(Cout,x,Cp);
+
+endmodule
+
+
+
+
+

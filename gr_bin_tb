@@ -1,0 +1,36 @@
+//test bench
+module gr_bin_tb;
+
+	// Inputs
+	reg [3:0] G;
+
+	// Outputs
+	wire [3:0] B;
+	integer i;
+
+	// Instantiate the Unit Under Test (UUT)
+	gray_bin uut (
+		.G(G), 
+		.B(B)
+	);
+
+	initial
+	begin
+		// Initialize Inputs
+		G <= 4'b0000;
+		$monitor("T=%t,Input:G=%b,Output:B=%b",$time,G,B);
+		for(i=0;i<10;i=i+1)
+		 begin
+		  #5;
+		  G<={$random};
+		// Add stimulus here
+		 end
+	end
+		 
+		 initial
+		  #100 $finish();
+
+
+      
+endmodule
+

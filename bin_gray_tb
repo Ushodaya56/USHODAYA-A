@@ -1,0 +1,30 @@
+//test bench
+module bin_gr_tb;
+
+	// Inputs
+	reg [3:0] B;
+
+	// Outputs
+	wire [3:0] G;
+	integer i;
+
+	// Instantiate the Unit Under Test (UUT)
+	bin_gr uut (
+		.B(B), 
+		.G(G)
+	);
+
+	initial 
+	   begin
+		// Initialize Inputs
+        B<=4'd0;
+        $monitor("T=%t,Input: B=%b,Output:G=%b",$time,B,G);
+		  for(i=0;i<5;i=i+1)
+		   begin
+			 #5;
+			 B<={$random};
+			end
+		 end
+    
+endmodule
+

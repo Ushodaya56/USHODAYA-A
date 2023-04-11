@@ -1,0 +1,8 @@
+//source code
+module half_subtractor(A,B,diff,borr);
+input A,B;
+output diff,borr;
+assign diff=A^B;
+assign borr=(~A)&B;
+
+endmodule

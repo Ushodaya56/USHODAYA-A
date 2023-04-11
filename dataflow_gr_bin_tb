@@ -1,0 +1,29 @@
+//test code
+module gr_bin1_tb;
+
+	// Inputs
+	reg [3:0] gray;
+	integer i;
+
+	// Outputs
+	wire [3:0] bin;
+
+	// Instantiate the Unit Under Test (UUT)
+	gr_bin1 uut (
+		.gray(gray), 
+		.bin(bin)
+	);
+
+	initial 
+	 begin
+	  gray<=4'd0;
+	  $monitor("T=%t,Input: gray=%b,Output: bin=%b",$time,gray,bin);
+	  for(i=0;i<20;i=i+1)
+	   begin
+		 #5;
+		 gray<={$random}%16;
+		end
+		#200 $finish();
+		end
+      
+endmodule

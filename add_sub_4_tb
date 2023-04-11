@@ -1,0 +1,39 @@
+// test bench
+module add_sub_4bit_tb;
+
+	// Inputs
+	reg [3:0] A;
+	reg [3:0] B;
+	reg ctrl;
+	integer i;
+
+	// Outputs
+	wire [3:0] Sum;
+	wire [3:0] Cout;
+
+	// Instantiate the Unit Under Test (UUT)
+	add_sub_4bit uut (
+		.A(A), 
+		.B(B), 
+		.ctrl(ctrl), 
+		.Sum(Sum), 
+		.Cout(Cout)
+	);
+
+	initial 
+	  begin
+	    {A,B,ctrl}<=9'd0;
+		 $monitor("T=%t,Inputs:A=%b,B=%b,ctrl=%b,Output:Sum=%b,Cout[3]=%b",$time,A,B,ctrl,Sum,Cout[3]);
+		 for(i=0;i<21;i=i+1)
+		   begin
+			  #5;
+			  A<={$random}%16;
+			  B<={$random}%16;
+			  ctrl<={$random};
+			 end
+			 #200 $finish();
+			 
+		end
+			 
+      
+endmodule

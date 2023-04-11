@@ -1,0 +1,23 @@
+//source code
+
+module add_sub_4bit(A,B,ctrl,Sum,Cout);
+parameter size=4;
+input [size-1:0]A,B;
+output [size-1:0]Sum,Cout;
+input ctrl;
+genvar g;
+wire [size-1:0]go;
+
+
+// this is the initialisation
+assign go[0]=ctrl^B[0]; // cin=ctrl=1; 2's complement of negative number
+full_adder f1(.A(A[0]),.B(go[0]),.Cin(ctrl),.sum(Sum[0]),.carry(Cout[0]));
+
+generate  // this loop will rum size-1 times
+ for(g=1;g<size;g=g+1)
+   begin : full_h1 // handle
+	 assign go[g]=B[g]^ctrl;
+    full_adder f2(.A(A[g]),.B(go[g]),.Cin(Cout[g-1]),.sum(Sum[g]),.carry(Cout[g]));
+	end
+endgenerate
+endmodule

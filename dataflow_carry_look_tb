@@ -1,0 +1,39 @@
+//test bench
+
+module carry_look_adder_tb;
+
+	// Inputs
+	reg [3:0] A;
+	reg [3:0] B;
+	reg Cin;
+	integer i;
+
+	// Outputs
+	wire [3:0] Sum;
+	wire Carry;
+
+	// Instantiate the Unit Under Test (UUT)
+	carry_look_adder uut (
+		.A(A), 
+		.B(B), 
+		.Cin(Cin), 
+		.Sum(Sum), 
+		.Carry(Carry)
+	);
+
+	initial
+   	begin
+		// Initialize Inputs
+		{A,B,Cin}<=9'd0;
+		$monitor("T=%t,Inputs: A=%b,B=%b,Cin=%b,Outputs:Sum=%b,Carry=%b",$time,A,B,Cin,Sum,Carry);
+		for(i=0;i<21;i=i+1)
+		 begin
+		  #5;
+		  A<={$random}%16;
+		  B<={$random}%16;
+		  Cin<={$random}; 
+		 end
+		 #200 $finish();
+		 end
+		 
+endmodule

@@ -1,0 +1,14 @@
+//source code
+module ripple_data(A,B,Cin,Carry,Sum);
+input [3:0]A,B;
+input Cin;
+output [3:0]Sum;
+output Carry;
+wire [2:0]cout;
+
+full_adder f1(.A(A[0]),.B(B[0]),.Cin(Cin),.sum(Sum[0]),.carry(cout[0]));
+full_adder f2(.A(A[1]),.B(B[1]),.Cin(cout[0]),.sum(Sum[1]),.carry(cout[1]));
+full_adder f3(.A(A[2]),.B(B[2]),.Cin(cout[1]),.sum(Sum[2]),.carry(cout[2]));
+full_adder f4(.A(A[3]),.B(B[3]),.Cin(cout[2]),.sum(Sum[3]),.carry(Carry));
+
+endmodule

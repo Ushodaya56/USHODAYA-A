@@ -1,0 +1,26 @@
+// test bench
+
+module half_adder_tb;
+
+reg A,B;
+integer i;
+wire sum,carry;
+
+//instantiating the unit under test
+half_adder uut(.A(A),.B(B),.sum(sum),.carry(carry));
+
+initial
+ begin
+	{A,B}<=2'b00;
+	$monitor("T=%t, Inputs: A=%b, B=%b, Outputs: sum=%b, carry=%b",$time,A,B,sum,carry);
+	for(i=0;i<10;i=i+1)
+	 begin
+	  #5;
+	  {A,B}<={$random};
+	  end
+	 #100 $finish();
+	  
+
+	end
+      
+endmodule

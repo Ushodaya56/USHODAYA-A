@@ -1,0 +1,21 @@
+//test bench
+module half_subtractor_tb;
+ reg A,B;
+ integer i;
+ wire diff,borr;
+
+	// Instantiate the Unit Under Test (UUT)
+	half_subtractor uut (.A(A),.B(B),.diff(diff),.borr(borr));
+	initial 
+	  begin
+		{A,B}<=2'b00;
+		$monitor("T=%t,Inputs:A=%b,B=%b,Outputs: diff=%b,borr=%b",$time,A,B,diff,borr);
+		for(i=0;i<10;i=i+1)
+		 begin
+		 #5;
+		 {A,B}<={$random};
+		 end
+		 #200 $finish();
+	  end
+      
+endmodule

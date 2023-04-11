@@ -1,0 +1,32 @@
+//test bench
+module bi_gr1_tb;
+
+	// Inputs
+	reg [3:0] bin;
+	integer i;
+	
+
+	// Outputs
+	wire [3:0] gray;
+
+	// Instantiate the Unit Under Test (UUT)
+	bi_gr1 uut (
+		.bin(bin), 
+		.gray(gray)
+	);
+
+	initial
+   	begin
+		 bin<=4'd0;
+		 $monitor("T=%t,Inputs:bin=%b,Outputs:gray=%b",$time,bin,gray);
+		 for(i=0;i<20;i=i+1)
+		 begin
+		  #5;
+		  bin<={$random}%16;
+		 end
+		 #200 $finish();
+		end
+		  
+      
+endmodule
+

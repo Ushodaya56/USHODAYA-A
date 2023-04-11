@@ -1,0 +1,7 @@
+//sorce code
+module full_subtractor(A,B,Cin,diff,borr);
+input A,B,Cin;
+output diff,borr;
+assign diff=A^B^Cin;
+assign borr=((~A)&B)|(B&Cin)|((~A)&Cin);
+endmodule

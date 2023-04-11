@@ -1,0 +1,15 @@
+//source code
+//using generate for loop
+module gr_bin1(gray,bin);
+parameter width=4;
+input [width-1:0]gray;
+output [width-1:0]bin;
+genvar i;
+generate 
+ for(i=0;i<width;i=i+1)
+  begin:gr_bi
+   assign bin[i]= ^(gray>>i);
+	end
+endgenerate
+
+endmodule

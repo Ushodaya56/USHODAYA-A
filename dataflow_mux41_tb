@@ -1,0 +1,33 @@
+//test bench
+
+module mux_41_tb;
+
+	// Inputs
+	reg [3:0] i;
+	reg [1:0] sel;
+	integer j;
+
+	// Outputs
+	wire out;
+
+	// Instantiate the Unit Under Test (UUT)
+	mux_41 uut (
+		.i(i), 
+		.sel(sel), 
+		.out(out)
+	);
+
+	initial 
+	  begin
+	    {i,sel}=6'd0;
+		 $monitor("T=%t,Inputs: i=%b, sel=%b, Outputs: out=%b",$time,i,sel,out);
+		 for(j=0;j<21;j=j+1)
+		  begin
+		   #5;
+		   i<={$random};
+			sel<={$random};
+		  end
+		  #200 $finish();
+		 end
+      
+endmodule

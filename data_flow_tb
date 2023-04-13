@@ -1,0 +1,34 @@
+//test bench
+module arr_mult_tb;
+
+	// Inputs
+	reg [3:0] A;
+	reg [3:0] B;
+	integer j;
+
+	// Outputs
+	wire [7:0] out;
+
+	// Instantiate the Unit Under Test (UUT)
+	arr_mult uut (
+		.A(A), 
+		.B(B), 
+		.out(out)
+	);
+
+	initial
+    	begin
+		{A,B}<=8'd0;
+		$monitor("T=%t,Inputs: A=%b,B=%b,Outputs: out=%b",$time,A,B,out);
+		for(j=0;j<26;j=j+1)
+		 begin
+		  #5;
+		  {A,B}<={$random};
+		  end
+		  #300 $finish();
+	
+
+	end
+      
+endmodule
+
